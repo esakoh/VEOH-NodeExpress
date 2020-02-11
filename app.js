@@ -8,16 +8,32 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res, next)=>{
-    res.send('Hello World 3');
-    //res.write
+app.use('/TEST', (req, res, next) => {
+    console.log('USE /TEST');
+    next();
 });
 
-app.use((req, res, next)=>{
+app.get('/TEST/', (req, res, next) => {
+    console.log('GET /TEST');
+    next();
+});
+
+app.post('/TEST', (req, res, next) => {
+    console.log('POST /TEST');
+    next();
+});
+
+
+app.get('/', (req, res, next) => {
+    res.send(`Hello world 3`);
+});
+
+app.use((req, res, next) => {
     res.status(404);
     res.send(`
-    page not found`);
+        page not found
+    `);
 });
-//app.post()
 
+//Shutdown server CTRL + C in terminal
 app.listen(PORT);
